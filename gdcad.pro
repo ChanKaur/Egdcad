@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     circle.cpp \
     ellipse.cpp \
     point.cpp \
-    line.cpp
+    line.cpp \
+    arc.cpp
 
 HEADERS  += mainwindow.h \
     circle.h \
     ellipse.h \
     point.h \
-    line.h
+    line.h \
+    arc.h
 
 FORMS    += mainwindow.ui
 

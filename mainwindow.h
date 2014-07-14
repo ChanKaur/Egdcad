@@ -11,6 +11,7 @@
 #include "circle.h"
 #include "ellipse.h"
 #include "point.h"
+#include "arc.h"
 
 namespace Ui {
 class MainWindow;
@@ -41,12 +42,14 @@ private:
     line *item1;
     circle *item2;
     ellipse *item3;
+    arc *item4;
 
 private slots:
     void drawPoint();
     void drawLine();
     void drawCircle();
     void drawEllipse();
+    void drawArc();
 };
 
 #endif // MAINWINDOW_H

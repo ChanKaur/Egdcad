@@ -32,11 +32,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->lineButton, SIGNAL(clicked()), this, SLOT(drawLine()));
     connect(ui->circleButton, SIGNAL(clicked()), this, SLOT(drawCircle()));
     connect(ui->ellipseButton, SIGNAL(clicked()), this, SLOT(drawEllipse()));
-
+connect(ui->arcButton, SIGNAL(clicked()),this, SLOT(drawArc()));
     connect(ui->actionPoints, SIGNAL(triggered()), this, SLOT(drawPoint()));
     connect(ui->actionLine, SIGNAL(triggered()), this, SLOT(drawLine()));
     connect(ui->actionCircle, SIGNAL(triggered()), this, SLOT(drawCircle()));
     connect(ui->actionEllipse, SIGNAL(triggered()), this, SLOT(drawEllipse()));
+    connect(ui->actionArc,SIGNAL(triggered()),this,SLOT(drawArc()));
 }
 
 void MainWindow::drawPoint(){
@@ -61,6 +62,13 @@ void MainWindow::drawCircle(){
     scene->addItem(item2);
     qDebug() << "Circle Created";
     connect(item2, SIGNAL(DrawFinished()), this, SLOT(drawCircle()));
+}
+void MainWindow::drawArc(){
+    ui->graphicsView->setScene(scene);
+    item4 = new arc;
+    scene->addItem(item4);
+    qDebug() << "Circle Created";
+    connect(item4, SIGNAL(DrawFinished()), this, SLOT(drawArc()));
 }
 
 void MainWindow::drawEllipse(){
