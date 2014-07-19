@@ -3,6 +3,9 @@
 
 #include <QMouseEvent>
 #include <QDebug>
+#include<QtOpenGL>
+#include<QGLWidget>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::MainWindow)
@@ -79,6 +82,15 @@ void MainWindow::drawEllipse(){
     connect(item3, SIGNAL(DrawFinished()), this, SLOT(drawEllipse()));
 }
 
+
+//void MainWindow::drawPolyline(){
+//    ui->graphicsView->setScene(scene);
+//    item5 = new polyline;
+//    scene->addItem(item5);
+//    qDebug() << "Ellipse Created";
+//    //connect(item3, SIGNAL(DrawFinished()), this, SLOT(drawEllipse()));
+//}
+
 void MainWindow::wheelEvent(QWheelEvent* event) {
     ui->graphicsView->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
@@ -92,6 +104,28 @@ void MainWindow::wheelEvent(QWheelEvent* event) {
         ui->graphicsView->scale(1.0 / scaleFactor, 1.0 / scaleFactor);
     }
 }
+QRect rect;
+QRubberBand *rubberBand;
+QPoint origin;
+void MainWindow::mousePressEvent(QMouseEvent *event)
+ {
+     origin = event->pos();
+     if (!rubberBand)
+         rubberBand = new QRubberBand(QRubberBand::Rectangle, this);
+     rubberBand->setGeometry(QRect(origin, QSize()));
+     rubberBand->show();
+ }
+
+ void MainWindow::mouseMoveEvent(QMouseEvent *event)
+ {
+     rubberBand->setGeometry(QRect(origin, event->pos()).normalized());
+ }
+
+ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+ {
+     rubberBand->hide();
+
+ }
 
 MainWindow::~MainWindow()
 {

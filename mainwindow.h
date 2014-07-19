@@ -6,6 +6,8 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QPainter>
+#include<QMouseEvent>
+#include<QRubberBand>
 
 #include "line.h"
 #include "circle.h"
@@ -27,6 +29,10 @@ public:
 
 protected:
     void wheelEvent(QWheelEvent* event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+
 
 private:
     Ui::MainWindow *ui;
@@ -44,12 +50,16 @@ private:
     ellipse *item3;
     arc *item4;
 
+
+
+
 private slots:
     void drawPoint();
     void drawLine();
     void drawCircle();
     void drawEllipse();
     void drawArc();
+
 };
 
 #endif // MAINWINDOW_H
