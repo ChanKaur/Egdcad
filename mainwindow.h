@@ -6,20 +6,16 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QPainter>
-#include<QMouseEvent>
-#include<QRubberBand>
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrintPreviewDialog>
 
 #include "line.h"
 #include "circle.h"
 #include "ellipse.h"
 #include "point.h"
-#include "arc.h"
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, public Ui::MainWindow
 {
     Q_OBJECT
 
@@ -29,10 +25,7 @@ public:
 
 protected:
     void wheelEvent(QWheelEvent* event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
-
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
 private:
     Ui::MainWindow *ui;
@@ -42,23 +35,35 @@ private:
     int mStartY;
     int mEndX;
     int mEndY;
+
     QGraphicsScene *scene;
     QPainter *painter;
     point *item;
     line *item1;
     circle *item2;
     ellipse *item3;
-    arc *item4;
+    QPrinter *printer;
+    QPixmap image;
+    QImage *imageObject;
 
-
-
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
     void drawPoint();
     void drawLine();
     void drawCircle();
     void drawEllipse();
-    void drawArc();
+    void newFile();
+
+    void on_actionSave_triggered();
+    void on_actionOpen_triggered();
+    void on_actionZoom_In_triggered();
+    void on_actionZoom_Out_triggered();
+    void on_actionInsert_Image_triggered();
+
+    void filePrintPreview();
+    void filePrint();
+    void print(QPrinter *);
 
 };
 

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
+QT       += core gui printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,15 +17,13 @@ SOURCES += main.cpp\
     circle.cpp \
     ellipse.cpp \
     point.cpp \
-    line.cpp \
-    arc.cpp
+    line.cpp
 
 HEADERS  += mainwindow.h \
     circle.h \
     ellipse.h \
     point.h \
-    line.h \
-    arc.h
+    line.h
 
 FORMS    += mainwindow.ui
 
